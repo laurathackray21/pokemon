@@ -26,13 +26,13 @@ export const PokemonCard = (pokemon: PokemonDetail) => {
 
 
   return (
-  <Card className={cn("border-2 hover:ring-2 hover:ring-offset-2 hover:cursor-pointer transition", colourVariants[pokemon.colour])}>
+  <Card className={cn("border-2 hover:ring-2 hover:ring-offset-2 hover:cursor-pointer transition group", colourVariants[pokemon.colour])}>
     <CardHeader>
     <CardTitle className="text-black">{pokemon.name.toUpperCase()}</CardTitle>
     <CardDescription>{pokemon.description}</CardDescription>
   </CardHeader>
   <CardContent className="flex justify-center">
-    <Image
+    <Image className="group-hover:scale-110 transition group-hover:-rotate-6 group"
     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`} 
     alt="Image of pokemon" 
     width={200} 
