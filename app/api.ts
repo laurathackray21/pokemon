@@ -1,4 +1,4 @@
-import { PokemonSpeciesResponse } from "./types";
+import { PokemonResponse, PokemonSpeciesResponse } from "./types";
 
 export async function getDataFromUrl<TResponse>(
   url: string
@@ -20,4 +20,8 @@ export async function getPokemonSpecies(
   name: string
 ): Promise<PokemonSpeciesResponse> {
   return getDataFromUrl(`https://pokeapi.co/api/v2/pokemon-species/${name}/`);
+}
+
+export async function getPokemon(): Promise<PokemonResponse> {
+  return getDataFromUrl(`https://pokeapi.co/api/v2/pokemon/?limit=50`);
 }

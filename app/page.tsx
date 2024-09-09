@@ -1,21 +1,10 @@
 
 import { PokemonCard, PokemonDetail } from "./_components/PokemonCard";
-import { PokemonResponse } from "./types";
 import Link from "next/link";
-import { getPokemonSpecies } from "./api";
+import { getPokemon, getPokemonSpecies } from "./api";
 
 async function getAllPokemon(): Promise<PokemonDetail[]> {  
-  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=50`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
-  }
-  const response = await res.json() as PokemonResponse;
-  
+  const response = await getPokemon();
   const summaries: PokemonDetail[] = [];
   for (const pokemon of response.results) {   
     const pokemonSpeciesData = await getPokemonSpecies(pokemon.name)
