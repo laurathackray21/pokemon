@@ -1,3 +1,5 @@
+"use client"
+
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -7,7 +9,7 @@ export interface PokemonDetail {
   id: number;
   description: string;
   colour: string;
-}
+} 
 
 
 export const PokemonCard = (pokemon: PokemonDetail) => {
@@ -24,8 +26,8 @@ export const PokemonCard = (pokemon: PokemonDetail) => {
     gray: 'bg-gray-50 hover:ring-gray-500',
   }
 
-
   return (
+   
   <Card className={cn("border-2 hover:ring-2 hover:ring-offset-2 hover:cursor-pointer transition group", colourVariants[pokemon.colour])}>
     <CardHeader>
     <CardTitle className="text-black">{pokemon.name.toUpperCase()}</CardTitle>

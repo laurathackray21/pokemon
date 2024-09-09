@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { PokemonCard, PokemonDetail } from "./_components/pokemon-card";
+import { PokemonCard, PokemonDetail } from "./_components/PokemonCard";
 import { PokemonResponse, PokemonSpeciesResponse } from "./types";
+import Link from "next/link";
 
 async function getPokemonSpecies(name: string): Promise<PokemonSpeciesResponse> {
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${name}/`, {
@@ -59,10 +60,12 @@ export default async function Home() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {pokemon.map((p: PokemonDetail) => (
-            <PokemonCard 
-              key={p.id} 
-              {...p}>            
-            </PokemonCard>))}      
+            <Link key={p.id} href={`/pokemon/${p.name}`}>
+              <PokemonCard 
+                key={p.id} 
+                {...p}>            
+              </PokemonCard>
+            </Link>))}      
         </div>
       </div>      
     </main>
