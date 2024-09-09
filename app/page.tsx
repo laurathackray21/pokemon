@@ -1,20 +1,8 @@
-import Image from "next/image";
-import { PokemonCard, PokemonDetail } from "./_components/PokemonCard";
-import { PokemonResponse, PokemonSpeciesResponse } from "./types";
-import Link from "next/link";
 
-async function getPokemonSpecies(name: string): Promise<PokemonSpeciesResponse> {
-  const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${name}/`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-  if (!response.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
-  }
-  return response.json();
-}
+import { PokemonCard, PokemonDetail } from "./_components/PokemonCard";
+import { PokemonResponse } from "./types";
+import Link from "next/link";
+import { getPokemonSpecies } from "./api";
 
 async function getAllPokemon(): Promise<PokemonDetail[]> {  
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=50`, {
@@ -49,15 +37,7 @@ export default async function Home() {
 
   return (
     <main className="flex min-h-screen flex-col ">
-      <div className="container">
-        <div className="flex gap-4 p-8">
-          <Image
-            src='/pokemon.svg'
-            alt="Pokemon Logo"
-            width={200}
-            height={24}
-          />
-        </div>
+      <div className="container">        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {pokemon.map((p: PokemonDetail) => (
             <Link key={p.id} href={`/pokemon/${p.name}`}>

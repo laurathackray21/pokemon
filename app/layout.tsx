@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +22,15 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className={inter.className}>     
+      <body className={inter.className}> 
+      <div className="flex gap-4 p-8">
+          <Image
+            src='/pokemon.svg'
+            alt="Pokemon Logo"
+            width={200}
+            height={24}
+          />
+        </div>    
         {modal}
         {children}        
       </body>
