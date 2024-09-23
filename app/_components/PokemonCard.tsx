@@ -4,12 +4,10 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Description } from "@radix-ui/react-dialog";
 import Image from "next/image";
 
 export type PokemonDetail = {
@@ -46,10 +44,18 @@ export const PokemonCard = ({ pokemon }: PokemonDetailType) => {
     >
       <CardHeader>
         <CardTitle className="text-black">
-          {pokemon.name ? pokemon.name.toUpperCase() : "Name not found"}
+          {pokemon.name ? (
+            pokemon.name.toUpperCase()
+          ) : (
+            <div className="h-8 w-full rounded-xl">Enter a name</div>
+          )}
         </CardTitle>
         <CardDescription>
-          {pokemon.description ? pokemon.description : "Description not found"}
+          {pokemon.description ? (
+            pokemon.description
+          ) : (
+            <div className="h-8 w-full rounded-xl">Enter a description</div>
+          )}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex justify-center">
@@ -62,12 +68,11 @@ export const PokemonCard = ({ pokemon }: PokemonDetailType) => {
             height={200}
           />
         ) : (
-          <div>Image not found</div>
+          <div className="h-72 w-full rounded-xl bg-gray-100 items-center justify-center text-center flex">
+            Add an image
+          </div>
         )}
       </CardContent>
-      {/* <CardFooter>
-    <p>Card Footer</p>
-  </CardFooter> */}
     </Card>
   );
 };

@@ -9,7 +9,7 @@ interface PokemonModalProps {
 
 export default function PokemonModal(props: PokemonModalProps) {
   return (
-    <Modal>
+    <Modal title={props.params.slug}>
       <PokemonDetail name={props.params.slug}></PokemonDetail>
     </Modal>
   );

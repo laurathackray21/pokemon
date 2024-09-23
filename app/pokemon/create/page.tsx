@@ -2,7 +2,7 @@
 import { useState } from "react";
 import CreatePokemonForm from "./CreatePokemonForm";
 import { PokemonDetail } from "@/app/_components/PokemonCard";
-import PreviewPokemon from "./previewPokemon";
+import PreviewPokemon from "./PreviewPokemon";
 
 export type PokemonFormType = {
   name: string;
@@ -20,9 +20,11 @@ export default function CreatePokemonPage() {
   });
 
   function updatePokemon(pokemonDetail: PokemonFormType) {
-    console.log(pokemonDetail.imageFile[0]);
+    let imageUri = "";
+    if (pokemonDetail.imageFile[0]) {
+      imageUri = URL.createObjectURL(pokemonDetail.imageFile[0]);
+    }
 
-    const imageUri = URL.createObjectURL(pokemonDetail.imageFile[0]) ?? "";
     setPokemon({
       colour: pokemonDetail.colour,
       description: pokemonDetail.description,
