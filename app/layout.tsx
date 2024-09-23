@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,17 +24,29 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className={inter.className}> 
-      <div className="flex gap-4 p-8">
-          <Image
-            src='/pokemon.svg'
-            alt="Pokemon Logo"
-            width={200}
-            height={24}
-          />
-        </div>    
-        {modal}
-        {children}        
+      <body className={inter.className}>
+        <div className="bg-white/80 border-b sticky top-0 backdrop-blur-sm">
+          <div className="container flex gap-4 px-4 py-2 ">
+            <Image
+              src="/pokemon.svg"
+              alt="Pokemon Logo"
+              width={200}
+              height={12}
+            />
+            <div className="flex items-center gap-4">
+              <Link href="/" passHref>
+                <Button variant="ghost">Pokedex</Button>
+              </Link>
+              <Link href="pokemon/create" passHref>
+                <Button variant="ghost">Create your own!</Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className="container pt-8">
+          {modal}
+          {children}
+        </div>
       </body>
     </html>
   );
