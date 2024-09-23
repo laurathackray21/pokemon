@@ -1,26 +1,21 @@
-"use client"
+"use client";
 
-import { 
-  Dialog,
-  DialogOverlay,
-  DialogContent  } from "@/components/ui/dialog"
+import { Dialog, DialogOverlay, DialogContent } from "@/components/ui/dialog";
 
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation";
 
-export function Modal({children}: {children: React.ReactNode}) {
-  const router = useRouter()
-  
+export function Modal({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+
   const handleOpenChange = () => {
-    router.back()
-  }
- 
+    router.back();
+  };
+
   return (
     <Dialog defaultOpen={true} open={true} onOpenChange={handleOpenChange}>
       <DialogOverlay>
-        <DialogContent>
-          {children}
-        </DialogContent>
+        <DialogContent>{children}</DialogContent>
       </DialogOverlay>
-      </Dialog>
-  )
+    </Dialog>
+  );
 }

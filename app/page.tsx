@@ -28,7 +28,7 @@ export default async function Home() {
     <main className="flex min-h-screen flex-col">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {pokemon.map((p: PokemonDetail) => (
-          <Link key={p.id} href={`/pokemon/${p.name}`}>
+          <Link key={p.id} href={`/pokemon/view/${p.name}`}>
             <PokemonCard key={p.id} {...p}></PokemonCard>
           </Link>
         ))}
