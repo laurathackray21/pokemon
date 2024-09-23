@@ -4,6 +4,12 @@ import CreatePokemonForm from "./CreatePokemonForm";
 import { PokemonDetail } from "@/app/_components/PokemonCard";
 import PreviewPokemon from "./previewPokemon";
 
+export type PokemonFormType = {
+  name: string;
+  description: string;
+  colour: string;
+  imageFile: FileList;
+};
 export default function CreatePokemonPage() {
   const [pokemon, setPokemon] = useState<PokemonDetail>({
     name: "",
@@ -13,8 +19,17 @@ export default function CreatePokemonPage() {
     imageUri: "",
   });
 
-  function updatePokemon(PokemonDetail: Omit<PokemonDetail, "id">) {
-    setPokemon({ ...PokemonDetail, id: pokemon.id });
+  function updatePokemon(pokemonDetail: PokemonFormType) {
+    console.log(pokemonDetail.imageFile[0]);
+
+    const imageUri = URL.createObjectURL(pokemonDetail.imageFile[0]) ?? "";
+    setPokemon({
+      colour: pokemonDetail.colour,
+      description: pokemonDetail.description,
+      id: pokemon.id,
+      imageUri: imageUri,
+      name: pokemonDetail.name,
+    });
   }
   return (
     <div className="flex grow gap-8">

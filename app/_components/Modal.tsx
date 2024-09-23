@@ -13,9 +13,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
 
   return (
     <Dialog defaultOpen={true} open={true} onOpenChange={handleOpenChange}>
-      <DialogOverlay>
-        <DialogContent>{children}</DialogContent>
-      </DialogOverlay>
+      <DialogContent>{children}</DialogContent>
     </Dialog>
   );
 }

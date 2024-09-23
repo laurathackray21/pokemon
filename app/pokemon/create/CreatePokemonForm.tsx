@@ -23,6 +23,7 @@ import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { PokemonFormType } from "./page";
 
 const formSchema = z.object({
   name: z
@@ -37,11 +38,11 @@ const formSchema = z.object({
     .string()
     .min(2, { message: "Colour must be at least 2 characters" })
     .max(50, { message: "Colour must be no more than 50 characters" }),
-  imageUri: z.string(),
+  imageFile: z.instanceof(FileList),
 });
 
 export type CreatePokemonFormProps = {
-  updatePokemon: (pokemon: Omit<PokemonDetail, "id">) => void;
+  updatePokemon: (pokemon: PokemonFormType) => void;
   className?: string;
 };
 
@@ -56,7 +57,7 @@ export default function CreatePokemonForm({
       name: "",
       description: "",
       colour: "",
-      imageUri: "",
+      imageFile: undefined,
     },
   });
 
@@ -66,6 +67,8 @@ export default function CreatePokemonForm({
     // ✅ This will be type-safe and validated.
     console.log(values);
   }
+
+  const fileRef = form.register("imageFile");
 
   return (
     <Form {...form}>
@@ -159,7 +162,7 @@ export default function CreatePokemonForm({
         />
         <FormField
           control={form.control}
-          name="imageUri"
+          name="imageFile"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Image</FormLabel>
@@ -168,9 +171,8 @@ export default function CreatePokemonForm({
                   type="file"
                   accept="image/*"
                   placeholder="Add an image"
-                  {...field}
+                  {...fileRef}
                   onChange={(ev) => {
-                    field.onChange(ev);
                     const files = ev.target.files;
                     if (!files) {
                       return;
@@ -181,10 +183,8 @@ export default function CreatePokemonForm({
                       return;
                     }
 
-                    updatePokemon({
-                      ...form.getValues(),
-                      imageUri: URL.createObjectURL(file),
-                    });
+                    field.onChange(ev.target?.files ?? undefined);
+                    updatePokemon(form.getValues());
                   }}
                 />
               </FormControl>
