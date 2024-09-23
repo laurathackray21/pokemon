@@ -43,7 +43,7 @@ export default function RootLayout({
             </div>
           </div>
         </div>
-        <div className="container pt-8">
+        <div className="container pt-8 flex">
           {modal}
           {children}
         </div>
