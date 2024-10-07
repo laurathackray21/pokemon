@@ -4,13 +4,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 import { useRouter } from "next/navigation";
 
-export function Modal({
-  children,
-  title,
-}: {
-  children: React.ReactNode;
-  title: string;
-}) {
+export function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   const handleOpenChange = () => {
@@ -19,7 +13,6 @@ export function Modal({
 
   return (
     <Dialog defaultOpen={true} open={true} onOpenChange={handleOpenChange}>
-      <DialogTitle>{title}</DialogTitle>
       <DialogContent>{children}</DialogContent>
     </Dialog>
   );

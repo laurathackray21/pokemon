@@ -1,13 +1,13 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -52,6 +52,44 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        pokemon: {
+          blue: {
+            DEFAULT: "hsl(var(--blue))",
+            foreground: "hsl(var(--blue-foreground))",
+          },
+          green: {
+            DEFAULT: "hsl(var(--green))",
+            foreground: "hsl(var(--green-foreground))",
+          },
+          red: {
+            DEFAULT: "hsl(var(--red))",
+            foreground: "hsl(var(--red-foreground))",
+          },
+          yellow: {
+            DEFAULT: "hsl(var(--yellow))",
+            foreground: "hsl(var(--yellow-foreground))",
+          },
+          black: {
+            DEFAULT: "hsl(var(--black))",
+            foreground: "hsl(var(--black-foreground))",
+          },
+          white: {
+            DEFAULT: "hsl(var(--white))",
+            foreground: "hsl(var(--white-foreground))",
+          },
+          brown: {
+            DEFAULT: "hsl(var(--brown))",
+            foreground: "hsl(var(--brown-foreground))",
+          },
+          purple: {
+            DEFAULT: "hsl(var(--purple))",
+            foreground: "hsl(var(--purple-foreground))",
+          },
+          pink: {
+            DEFAULT: "hsl(var(--pink))",
+            foreground: "hsl(var(--pink-foreground))",
+          },
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -75,6 +113,6 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;

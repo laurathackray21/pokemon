@@ -29,6 +29,24 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    --blue-foreground: 221.2 83.2% 53.3%;
+    --blue: 213.8 100% 96.9%;
+    --green: 151.8 81% 95.9%;
+    --green-foreground: 160.1 84.1% 39.4%;
+    --red: 0 85.7% 97.3%;
+    --red-foreground: 0 72.2% 50.6%;
+    --yellow: 54.5 91.7% 95.3%;
+    --yellow-foreground: 45.4 93.4% 47.5%;
+    --purple: 270 100% 98%;
+    --purple-foreground: 270.7 91% 65.1%;
+    --brown: 20 5.9% 90%;
+    --brown-foreground: 26 83.3% 14.1%;
+    --black: 20 5.9% 90%;
+    --black-foreground: 20 14.3% 4.1%;
+    --white: 0 0% 100%;
+    --white-foreground: 215 20.2% 65.1%;
+    --pink: 327.3 73.3% 97.1%;
+    --pink-foreground: 330.4 81.2% 60.4%;
   }
 
   .dark {
@@ -56,7 +74,64 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --blue: 201 90% 27.5%;
+    --blue-foreground: 198.6 88.7% 48.4%;
+    --green: 164.2 85.7% 16.5%;
+    --green-foreground: 160.1 84.1% 39.4%;
+    --red: 0 62.8% 30.6%;
+    --red-foreground: 0 84.2% 60.2%;
+    --yellow: 35.5 91.7% 32.9%;
+    --yellow-foreground: 47.9 95.8% 53.1%;
+    --purple: 273.6 65.6% 32%;
+    --purple-foreground: 270.7 91% 65.1%;
+    --brown: 26 83.3% 14.1%;
+    --brown-foreground: 25 5.3% 44.7%;
+    --black: 240 3.7% 15.9%;
+    --black-foreground: 240 5% 64.9%;
+    --white: 215 13.8% 34.1%;
+    --white-foreground: 0 0% 100%;
+    --pink: 335.9 69% 30.4%;
+    --pink-foreground: 330.4 81.2% 60.4%;
   }
+
+  .pokemon {
+    --muted-foreground: 0 0% 14.9%;
+    --blue: 198.6 88.7% 48.4%;
+    --blue-foreground: 224.3 76.3% 48%;
+    --green: 142.1 76.2% 36.3%;
+    --green-foreground: 142.8 64.2% 24.1%;
+    --red: 0 72.2% 50.6%;
+    --red-foreground: 0 62.8% 30.6%;
+    --yellow: 47.9 95.8% 53.1%;
+    --yellow-foreground: 26 90.5% 37.1%;
+    --purple: 270.7 91% 65.1%;
+    --purple-foreground: 273.5 86.9% 21%;
+    --brown: 31.8 81% 28.8%;
+    --brown-foreground: 25 5.3% 44.7%;
+    --black: 240 3.7% 15.9%;
+    --black-foreground: 240 5% 64.9%;
+    --white: 215 13.8% 34.1%;
+    --white-foreground: 0 0% 100%;
+    --pink: 330.4 81.2% 60.4%;
+    --pink-foreground: 335.9 69% 30.4%;
+  }
+
+  .pokemon-magic {
+    animation: hue 5s infinite ease-in-out;
+  }
+  
+  @keyframes hue {
+    0% {
+      filter: invert(0%) hue-rotate(0deg);
+    }
+    50% {
+      filter: invert(100%) hue-rotate(360deg);
+    }
+    100% {
+      filter: invert(0%) hue-rotate(0deg);    
+    }
+  }
+  
 }
 
 @layer base {

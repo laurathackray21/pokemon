@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 
 export type PokemonDetail = {
@@ -22,28 +23,29 @@ export type PokemonDetailType = {
 };
 
 export const PokemonCard = ({ pokemon }: PokemonDetailType) => {
+  const { theme } = useTheme();
   const colourVariants: Record<string, string> = {
-    blue: "bg-blue-50 hover:ring-blue-500 text-blue-900",
-    red: "bg-red-50 hover:ring-red-500",
-    green: "bg-green-50 hover:ring-green-500",
-    yellow: "bg-yellow-50 hover:ring-yellow-500",
-    black: "bg-black-50 hover:ring-black-500",
-    white: "bg-white-50 hover:ring-white-500",
-    brown: "bg-yellow-800/10 hover:ring-yellow-950",
-    purple: "bg-purple-50 hover:ring-purple-500",
-    pink: "bg-pink-50 hover:ring-pink-500",
-    gray: "bg-gray-50 hover:ring-gray-500",
+    blue: "bg-pokemon-blue hover:ring-pokemon-blue-foreground",
+    red: "bg-pokemon-red hover:ring-pokemon-red-foreground",
+    green: "bg-pokemon-green hover:ring-pokemon-green-foreground",
+    yellow: "bg-pokemon-yellow hover:ring-pokemon-yellow-foreground",
+    black: "bg-pokemon-black hover:ring-pokemon-black-foreground",
+    white: "bg-pokemon-white hover:ring-pokemon-white-foreground",
+    brown: "bg-pokemon-brown hover:ring-pokemon-brown-foreground",
+    purple: "bg-pokemon-purple hover:ring-pokemon-purple-foreground",
+    pink: "bg-pokemon-pink hover:ring-pokemon-pink-foreground",
+    gray: "bg-pokemon-gray hover:ring-pokemon-gray-foreground",
   };
 
   return (
     <Card
       className={cn(
-        "min-h-96 border-2 hover:ring-2 hover:ring-offset-2 hover:cursor-pointer transition group",
+        "min-h-96 border-2 hover:ring-2 hover:ring-offset-2 hover:ring-offset-background hover:cursor-pointer transition group",
         colourVariants[pokemon.colour]
       )}
     >
       <CardHeader>
-        <CardTitle className="text-black">
+        <CardTitle className="text-foreground">
           {pokemon.name ? (
             pokemon.name.toUpperCase()
           ) : (
@@ -58,7 +60,12 @@ export const PokemonCard = ({ pokemon }: PokemonDetailType) => {
           )}
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex justify-center">
+      <CardContent
+        className={cn(
+          // theme === "pokemon" ? "pokemon-magic" : "",
+          "flex justify-center"
+        )}
+      >
         {pokemon.imageUri ? (
           <Image
             className="group-hover:scale-110 transition group-hover:-rotate-6 group"
@@ -68,7 +75,7 @@ export const PokemonCard = ({ pokemon }: PokemonDetailType) => {
             height={200}
           />
         ) : (
-          <div className="h-72 w-full rounded-xl bg-gray-100 items-center justify-center text-center flex">
+          <div className="h-72 w-full rounded-xl bg-muted items-center justify-center text-center flex">
             Add an image
           </div>
         )}
