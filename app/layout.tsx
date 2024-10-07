@@ -44,7 +44,7 @@ export default function RootLayout({
                   <Link href="/" passHref>
                     <Button variant="ghost">Pokedex</Button>
                   </Link>
-                  <Link href="pokemon/create" passHref>
+                  <Link href="/pokemon/create" passHref>
                     <Button variant="ghost">Create your own!</Button>
                   </Link>
                 </div>
