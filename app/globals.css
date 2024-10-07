@@ -47,6 +47,8 @@
     --white-foreground: 215 20.2% 65.1%;
     --pink: 327.3 73.3% 97.1%;
     --pink-foreground: 330.4 81.2% 60.4%;
+    --header: var(--background)/80; 
+    --background-alt: var(--background);
   }
 
   .dark {
@@ -92,10 +94,13 @@
     --white-foreground: 0 0% 100%;
     --pink: 335.9 69% 30.4%;
     --pink-foreground: 330.4 81.2% 60.4%;
+    --header: var(--background)/80; 
+    --background-alt: var(--background);
   }
 
   .pokemon {
-    --muted-foreground: 0 0% 14.9%;
+    --background: 210 20% 98%;
+    --muted-foreground: 210 20% 98%;
     --blue: 198.6 88.7% 48.4%;
     --blue-foreground: 224.3 76.3% 48%;
     --green: 142.1 76.2% 36.3%;
@@ -114,6 +119,8 @@
     --white-foreground: 0 0% 100%;
     --pink: 330.4 81.2% 60.4%;
     --pink-foreground: 335.9 69% 30.4%;
+    --header: var(--red); 
+    --background-alt: 50.4 97.8% 63.5%;
   }
 
   .pokemon-magic {
