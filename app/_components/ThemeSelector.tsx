@@ -9,13 +9,20 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export const ThemeSelector = () => {
-  const { setTheme, themes } = useTheme();
+  const { setTheme, themes, theme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
   return (
     <div className="flex flex-row items-center gap-3">
       <Label>Theme:</Label>
-      <Select onValueChange={(value) => setTheme(value)}>
+      <Select value={theme} onValueChange={(value) => setTheme(value)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Select a theme" />
         </SelectTrigger>

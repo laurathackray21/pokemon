@@ -30,7 +30,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={cn(inter.className, "bg-background-alt")}>
-        <ThemeProvider attribute="class" themes={themes}>
+        <ThemeProvider attribute="class" themes={themes} defaultTheme="system">
           <div className="bg-header border-b sticky top-0 backdrop-blur-sm">
             <div className="container flex gap-4 px-4 py-2 ">
               <Image
