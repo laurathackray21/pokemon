@@ -1,20 +1,21 @@
 "use client";
 import { useState } from "react";
 import CreatePokemonForm from "./CreatePokemonForm";
-import { PokemonDetail } from "@/app/_components/PokemonCard";
 import PreviewPokemon from "./PreviewPokemon";
+import { PokemonDetail } from "@/app/types";
+import { ColourType } from "@/app/_components/PokemonCard";
 
 export type PokemonFormType = {
   name: string;
   description: string;
-  colour: string;
+  colour: ColourType;
   imageFile: FileList;
 };
 export default function CreatePokemon() {
   const [pokemon, setPokemon] = useState<PokemonDetail>({
     name: "",
     description: "",
-    colour: "",
+    colour: "white",
     id: 0,
     imageUri: "",
   });
@@ -26,23 +27,21 @@ export default function CreatePokemon() {
     }
 
     setPokemon({
-      colour: pokemonDetail.colour,
+      colour: pokemonDetail.colour ?? null,
       description: pokemonDetail.description,
       id: pokemon.id,
       imageUri: imageUri,
       name: pokemonDetail.name,
     });
   }
+
   return (
     <div className="flex grow gap-8">
       <CreatePokemonForm
         className="grow"
         updatePokemon={updatePokemon}
       ></CreatePokemonForm>
-      <PreviewPokemon
-        className="grow"
-        pokemonDetail={{ pokemon: pokemon }}
-      ></PreviewPokemon>
+      <PreviewPokemon className="grow" pokemonDetail={pokemon}></PreviewPokemon>
     </div>
   );
 }

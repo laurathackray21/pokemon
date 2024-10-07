@@ -1,5 +1,5 @@
 "use client";
-import { PokemonDetail } from "@/app/_components/PokemonCard";
+import { colourTypes, PokemonDetail } from "@/app/_components/PokemonCard";
 import { Button } from "@/components/ui/button";
 import {
   FormControl,
@@ -34,10 +34,7 @@ const formSchema = z.object({
     .string()
     .min(2, { message: "Description must be at least 2 characters" })
     .max(1000, { message: "Name must be no more than 1000 characters" }),
-  colour: z
-    .string()
-    .min(2, { message: "Colour must be at least 2 characters" })
-    .max(50, { message: "Colour must be no more than 50 characters" }),
+  colour: z.enum(colourTypes),
   imageFile: z.instanceof(FileList),
 });
 
@@ -56,7 +53,7 @@ export default function CreatePokemonForm({
     defaultValues: {
       name: "",
       description: "",
-      colour: "",
+      colour: "white",
       imageFile: undefined,
     },
   });

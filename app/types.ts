@@ -1,3 +1,5 @@
+import { ColourType } from "./_components/PokemonCard";
+
 interface Language {
   name: string;
   url: string;
@@ -107,3 +109,11 @@ export interface EvolutionChainResponse {
   chain: Chain;
   id: number;
 }
+
+export type PokemonDetail = {
+  name: string;
+  id: number;
+  description: string;
+  imageUri: string;
+  colour: ColourType;
+};
