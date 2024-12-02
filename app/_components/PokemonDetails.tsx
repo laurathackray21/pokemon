@@ -1,14 +1,14 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { getPokemonDetails } from "../actions/getPokemonDetail";
+import { PokemonDetail } from "../types/pokemonDetail";
 
 export interface PokemonDetailProps {
-  name: string;
+  pokemonDetails: PokemonDetail;
 }
 
-export const PokemonDetail = async (props: PokemonDetailProps) => {
-  const pokemon = await getPokemonDetails(props.name);
-
+export const PokemonDetails = ({ pokemonDetails }: PokemonDetailProps) => {
   const colourVariants: Record<string, string> = {
     blue: "bg-pokemon-blue",
     red: "bg-pokemon-red",
@@ -24,12 +24,14 @@ export const PokemonDetail = async (props: PokemonDetailProps) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="text-xl">{pokemon.name.toUpperCase()}</div>
-      <div className="text-muted-foreground text-sm">{pokemon.description}</div>
+      <div className="text-xl">{pokemonDetails.name.toUpperCase()}</div>
+      <div className="text-muted-foreground text-sm">
+        {pokemonDetails.description}
+      </div>
       <div className="flex justify-center">
         <Image
           className="group-hover:scale-110 transition group-hover:-rotate-6 group"
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonDetails.id}.png`}
           alt="Image of pokemon"
           width={200}
           height={200}
@@ -38,10 +40,10 @@ export const PokemonDetail = async (props: PokemonDetailProps) => {
       <div
         className={cn(
           "text-sm border-2 rounded",
-          colourVariants[pokemon.colour]
+          colourVariants[pokemonDetails.colour]
         )}
       >
-        <div className="p-4">Habitat: {pokemon.habitat}</div>
+        <div className="p-4">Habitat: {pokemonDetails.habitat}</div>
       </div>
     </div>
   );

@@ -1,9 +1,16 @@
-import { PokemonDetail } from "@/app/_components/PokemonDetail";
+"use server";
+import { PokemonDetails } from "@/app/_components/PokemonDetails";
+import { getPokemonDetails } from "@/app/actions/getPokemonDetail";
 
-export default function ViewPokemonPage({
+interface ViewPokemonPageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export default async function ViewPokemonPage({
   params,
-}: {
-  params: { slug: string };
-}) {
-  return <PokemonDetail name={params.slug}></PokemonDetail>;
+}: ViewPokemonPageProps) {
+  const pokemonDetails = await getPokemonDetails(params.slug);
+  return <PokemonDetails pokemonDetails={pokemonDetails}></PokemonDetails>;
 }
