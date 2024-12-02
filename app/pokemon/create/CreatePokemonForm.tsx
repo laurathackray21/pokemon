@@ -36,7 +36,9 @@ const formSchema = z.object({
     .min(2, { message: "Description must be at least 2 characters" })
     .max(1000, { message: "Name must be no more than 1000 characters" }),
   colour: z.enum(colourTypes),
-  imageFile: z.instanceof(FileList),
+  imageFile: z
+    .instanceof(File, { message: "Please upload a file." })
+    .refine((f) => f.size < 100_000, "Max 100Kb upload size."),
 });
 
 export type CreatePokemonFormProps = {

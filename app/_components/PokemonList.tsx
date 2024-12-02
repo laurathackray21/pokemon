@@ -4,9 +4,9 @@ import { forwardRef, LegacyRef, useEffect, useState } from "react";
 import { PokemonDetail } from "../types/pokemonDetail";
 import { getAllPokemonDetails } from "../actions/getPokemonDetail";
 import { PokemonCard } from "./PokemonCard";
-import { POKEMON_PER_PAGE } from "../page";
 import { Loader } from "lucide-react";
 import { useInView } from "react-intersection-observer";
+import { POKEMON_PER_PAGE } from "../consts/pokedex";
 
 interface PokemonListProps {
   initialPokemon: PokemonDetail[];

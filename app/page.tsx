@@ -1,7 +1,6 @@
 import { getAllPokemonDetails } from "./actions/getPokemonDetail";
 import PokemonList from "./_components/PokemonList";
-
-export const POKEMON_PER_PAGE = 20;
+import { POKEMON_PER_PAGE } from "./consts/pokedex";
 
 export default async function Home() {
   const initialPokemon = await getAllPokemonDetails(POKEMON_PER_PAGE, 0);
