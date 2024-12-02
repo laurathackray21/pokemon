@@ -183,7 +183,7 @@ export default function CreatePokemonForm({
                       return;
                     }
 
-                    field.onChange(ev.target?.files ?? undefined);
+                    field.onChange(file);
                     updatePokemon(form.getValues());
                   }}
                 />
