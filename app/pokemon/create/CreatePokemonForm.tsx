@@ -36,9 +36,9 @@ const formSchema = z.object({
     .min(2, { message: "Description must be at least 2 characters" })
     .max(1000, { message: "Name must be no more than 1000 characters" }),
   colour: z.enum(colourTypes),
-  imageFile: z
-    .instanceof(File, { message: "Please upload a file." })
-    .refine((f) => f.size < 100_000, "Max 100Kb upload size."),
+  imageFiles: z.unknown().transform((value) => {
+    return value as FileList;
+  }),
 });
 
 export type CreatePokemonFormProps = {
@@ -57,7 +57,7 @@ export default function CreatePokemonForm({
       name: "",
       description: "",
       colour: "white",
-      imageFile: undefined,
+      imageFiles: undefined,
     },
   });
 
@@ -68,7 +68,7 @@ export default function CreatePokemonForm({
     console.log(values);
   }
 
-  const fileRef = form.register("imageFile");
+  const fileRef = form.register("imageFiles");
 
   return (
     <Form {...form}>
@@ -162,7 +162,7 @@ export default function CreatePokemonForm({
         />
         <FormField
           control={form.control}
-          name="imageFile"
+          name="imageFiles"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Image</FormLabel>
@@ -183,7 +183,7 @@ export default function CreatePokemonForm({
                       return;
                     }
 
-                    field.onChange(file);
+                    field.onChange(files);
                     updatePokemon(form.getValues());
                   }}
                 />

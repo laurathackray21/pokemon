@@ -16,8 +16,8 @@ export default function CreatePokemon() {
 
   function updatePokemon(pokemonDetail: PokemonFormType) {
     let imageUri = "";
-    if (pokemonDetail.imageFile) {
-      imageUri = URL.createObjectURL(pokemonDetail.imageFile);
+    if (pokemonDetail.imageFiles?.[0]) {
+      imageUri = URL.createObjectURL(pokemonDetail.imageFiles?.[0]);
     }
 
     setPokemon({
