@@ -9,34 +9,16 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "class-variance-authority";
-// import { useTheme } from "next-themes";
 import Image from "next/image";
 
-type PokemonDetailType = {
+export type PokemonCardProps = {
   pokemon: {
     name: string;
     id: number;
     description: string;
     imageUri: string;
   };
-};
-
-export type PokemonCardProps = PokemonDetailType &
-  VariantProps<typeof pokemonCardVariants>;
-
-export const colourTypes = [
-  "blue",
-  "red",
-  "green",
-  "yellow",
-  "black",
-  "white",
-  "brown",
-  "purple",
-  "pink",
-  "gray",
-] as const;
-export type ColourType = (typeof colourTypes)[number];
+} & VariantProps<typeof pokemonCardVariants>;
 
 const pokemonCardVariants = cva(
   "min-h-96 border-2 hover:ring-2 hover:ring-offset-2 hover:ring-offset-background hover:cursor-pointer transition group",
@@ -62,7 +44,6 @@ const pokemonCardVariants = cva(
 );
 
 export const PokemonCard = ({ pokemon, colour }: PokemonCardProps) => {
-  // const { theme } = useTheme();
   return (
     <Card className={cn(pokemonCardVariants({ colour }))}>
       <CardHeader>
@@ -81,12 +62,7 @@ export const PokemonCard = ({ pokemon, colour }: PokemonCardProps) => {
           )}
         </CardDescription>
       </CardHeader>
-      <CardContent
-        className={cn(
-          // theme === "pokemon" ? "pokemon-magic" : "",
-          "flex justify-center"
-        )}
-      >
+      <CardContent className={cn("flex justify-center")}>
         {pokemon.imageUri ? (
           <Image
             className="group-hover:scale-110 transition group-hover:-rotate-6 group"

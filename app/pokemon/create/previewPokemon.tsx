@@ -1,5 +1,6 @@
 import { PokemonCard } from "@/app/_components/PokemonCard";
-import { PokemonDetail } from "@/app/types";
+import { PokemonDetail } from "@/app/types/pokemonDetail";
+
 import { cn } from "@/lib/utils";
 
 export type PreviewPokemonProps = {

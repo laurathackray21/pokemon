@@ -1,27 +1,25 @@
-import { ColourType } from "./_components/PokemonCard";
-
-interface Language {
+export interface Language {
   name: string;
   url: string;
 }
 
-interface Version {
+export interface Version {
   name: string;
   url: string;
 }
 
-interface FlavorTextEntry {
+export interface FlavorTextEntry {
   flavor_text: string;
   language: Language;
   version: Version;
 }
 
-interface Habitat {
+export interface Habitat {
   name: string;
   url: string;
 }
 
-interface Variety {
+export interface Variety {
   is_default: boolean;
   pokemon: {
     name: string;
@@ -29,42 +27,12 @@ interface Variety {
   };
 }
 
-export interface PokemonSpeciesResponse {
-  base_happiness: number;
-  capture_rate: number;
-  color: {
-    name: string;
-    url: string;
-  };
-  flavor_text_entries: FlavorTextEntry[];
-  habitat: Habitat;
-  has_gender_differences: boolean;
-  hatch_counter: number;
-  id: number;
-  is_baby: boolean;
-  is_legendary: boolean;
-  is_mythical: boolean;
-  name: string;
-  order: number;
-  varieties: Variety[];
-  evolution_chain: {
-    url: string;
-  };
-}
-
-export interface PokemonResponse {
-  results: {
-    name: string;
-    url: string;
-  }[];
-}
-
-interface EvolutionTrigger {
+export interface EvolutionTrigger {
   name: string;
   url: string;
 }
 
-interface EvolutionDetails {
+export interface EvolutionDetails {
   gender: number | null;
   held_item: any | null;
   item: any | null;
@@ -85,19 +53,19 @@ interface EvolutionDetails {
   turn_upside_down: boolean;
 }
 
-interface Species {
+export interface Species {
   name: string;
   url: string;
 }
 
-interface EvolvesTo {
+export interface EvolvesTo {
   evolution_details: EvolutionDetails[];
   evolves_to: EvolvesTo[];
   is_baby: boolean;
   species: Species;
 }
 
-interface Chain {
+export interface Chain {
   evolution_details: EvolutionDetails[];
   evolves_to: EvolvesTo[];
   is_baby: boolean;
@@ -109,11 +77,3 @@ export interface EvolutionChainResponse {
   chain: Chain;
   id: number;
 }
-
-export type PokemonDetail = {
-  name: string;
-  id: number;
-  description: string;
-  imageUri: string;
-  colour: ColourType;
-};

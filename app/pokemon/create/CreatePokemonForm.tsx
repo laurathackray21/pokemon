@@ -1,5 +1,5 @@
 "use client";
-import { colourTypes, PokemonDetail } from "@/app/_components/PokemonCard";
+
 import { Button } from "@/components/ui/button";
 import {
   FormControl,
@@ -23,7 +23,8 @@ import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { PokemonFormType } from "./page";
+import { colourTypes } from "@/app/types/colourType";
+import { PokemonFormType } from "@/app/types/pokemonForm";
 
 const formSchema = z.object({
   name: z

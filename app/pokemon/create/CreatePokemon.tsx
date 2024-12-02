@@ -2,15 +2,9 @@
 import { useState } from "react";
 import CreatePokemonForm from "./CreatePokemonForm";
 import PreviewPokemon from "./PreviewPokemon";
-import { PokemonDetail } from "@/app/types";
-import { ColourType } from "@/app/_components/PokemonCard";
+import { PokemonDetail } from "@/app/types/pokemonDetail";
+import { PokemonFormType } from "@/app/types/pokemonForm";
 
-export type PokemonFormType = {
-  name: string;
-  description: string;
-  colour: ColourType;
-  imageFile: FileList;
-};
 export default function CreatePokemon() {
   const [pokemon, setPokemon] = useState<PokemonDetail>({
     name: "",
