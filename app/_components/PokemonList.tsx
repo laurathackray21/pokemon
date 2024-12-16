@@ -34,22 +34,24 @@ export default function PokemonList({ initialPokemon }: PokemonListProps) {
 
   useEffect(() => {
     if (isInView && hasMoreData && !loading) {
-      if (isInView && hasMoreData) {
-        setLoading(true);
-        getAllPokemonDetails(POKEMON_PER_PAGE, offset).then((result) => {
-          if (
-            result.length === 0 ||
-            result[result.length - 1].id >= GENERATION_ONE_MAX_ID
-          ) {
-            setHasMoreData(false);
-            result = result.filter((p) => p.id <= GENERATION_ONE_MAX_ID);
-          }
+      setLoading(true);
+      const loadMorePokemon = async () => {
+        let result = await getAllPokemonDetails(POKEMON_PER_PAGE, offset);
 
-          setOffset((prevOffset) => prevOffset + POKEMON_PER_PAGE);
-          setPokemon((prevPokemon) => [...prevPokemon, ...result]);
-          setLoading(false);
-        });
-      }
+        if (
+          result.length === 0 ||
+          result[result.length - 1].id >= GENERATION_ONE_MAX_ID
+        ) {
+          setHasMoreData(false);
+          result = result.filter((p) => p.id <= GENERATION_ONE_MAX_ID);
+        }
+
+        setOffset((prevOffset) => prevOffset + POKEMON_PER_PAGE);
+        setPokemon((prevPokemon) => [...prevPokemon, ...result]);
+        setLoading(false);
+      };
+
+      loadMorePokemon();
     }
   }, [isInView, hasMoreData, loading, offset]);
 
