@@ -13,7 +13,7 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-  output: "standalone",
+  // output: "standalone",
 };
 
 export default nextConfig;
