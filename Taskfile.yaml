@@ -1,0 +1,59 @@
+version: "3"
+
+vars:
+  PROJECT_ID: manifest-setup-447710-h7
+  REGION: europe-west1
+  TAG:
+    sh: git log -n 1 --format=%h
+  REGISTRY: "{{.REGION}}-docker.pkg.dev"  
+  SERVICE_NAME: "pokemon"
+
+tasks:
+  login:
+    desc: Login to Google Cloud
+    cmds:
+      - gcloud auth login
+      - gcloud config set project {{.PROJECT_ID}}
+      - gcloud auth configure-docker {{.REGISTRY}}
+  
+  setup:
+    cmds:
+      - task login
+
+  # this would eventually go in a pipeline
+  build-google-cli:
+    desc: Build the container image using google cli
+    cmds:
+      - gcloud builds submit --tag gcr.io/{{.PROJECT_ID}}/pokemon/{{.TAG}} --project {{.PROJECT_ID}}
+  
+  deploy-google-cli:
+    desc: Deploy to cloud run using google cli
+    cmds:
+      - gcloud run deploy {{.SERVICE_NAME}} --image gcr.io/{{.PROJECT_ID}}/pokemon/{{.TAG}} --project {{.PROJECT_ID}} --platform managed --allow-unauthenticated --region={{.REGION}}
+    
+  build-and-deploy-google-cli:
+    desc: Build and deploy to cloud run using google cli
+    cmds:
+      - task build-google-cli
+      - task deploy-google-cli
+
+  deploy-yaml-file:
+    - gcloud run services replace service.yaml 
+
+  build-and-deploy-yaml-file:
+    - task build-google-cli
+    - gcloud run services replace service.yaml
+
+  plan-terraform:
+    dir:
+      ./infrastructure
+    cmds:
+      - terraform init
+      - terraform plan -out=tfplan
+  
+  deploy-terraform:
+    dir:
+      ./infrastructure
+    cmds:
+      - terraform apply tfplan
+      
