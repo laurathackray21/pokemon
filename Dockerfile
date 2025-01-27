@@ -13,6 +13,11 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN corepack enable npm && npm run build
 
+# Stage 3: Copy public
+FROM base AS public
+WORKDIR /public
+COPY . .
+
 # Stage 3: Production server
 FROM base AS runner
 WORKDIR /app
