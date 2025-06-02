@@ -52,7 +52,7 @@ export default function RootLayout({
               </div>
             </div>
           </div>
-          <div className="container rounded-xl py-8 my-8 flex bg-background">
+          <div className="container rounded-xl pb-8 mb-8 mt-4 flex bg-background">
             {modal}
             {children}
           </div>

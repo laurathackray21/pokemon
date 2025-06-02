@@ -1,6 +1,4 @@
 "use server";
-import { getDataFromUrl } from "../helpers/api";
-import { EvolutionChainResponse } from "../types/api.types";
 import { ColourType } from "../types/colourType";
 import { PokemonDetail } from "../types/pokemonDetail";
 import { getPokemon } from "./getPokemon";
@@ -31,9 +29,9 @@ export async function getAllPokemonDetails(
 
 export async function getPokemonDetails(name: string): Promise<PokemonDetail> {
   const pokemonSpecies = await getPokemonSpecies(name); //TODO add error handling
-  const pokemonEvolutionChain = await getDataFromUrl<EvolutionChainResponse>(
-    pokemonSpecies.evolution_chain.url
-  ); //TODO add error handling
+  // const pokemonEvolutionChain = await getDataFromUrl<EvolutionChainResponse>(
+  //   pokemonSpecies.evolution_chain.url
+  // ); //TODO add error handling
   const flavourEntry = pokemonSpecies.flavor_text_entries.find(
     (p) => p.language.name === "en" && p.version.name === "red"
   );
@@ -46,4 +44,19 @@ export async function getPokemonDetails(name: string): Promise<PokemonDetail> {
     colour: pokemonSpecies.color.name as ColourType,
     description: flavourEntry?.flavor_text ?? "No description available",
   };
+}
+
+export async function filterPokemonByLetter(letter: string): Promise<PokemonDetail[]> {
+  const allPokemon = await getPokemon(151, 0);
+  const filteredPokemon = allPokemon.results.filter((p) => p.name.startsWith(letter.toLowerCase()));
+ 
+  const pokemonDetails: PokemonDetail[] = [];
+  for (const p of filteredPokemon) {
+    const details = await getPokemonDetails(p.name)    
+    console.log(details)
+    pokemonDetails.push(details);
+  }
+   console.log(pokemonDetails)
+
+  return pokemonDetails;
 }
