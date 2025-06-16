@@ -38,7 +38,7 @@ export default function RootLayout({
           >
             <main>
               <MenuBar />
-              <div className="flex min-h-screen w-full flex-col container rounded-xl pb-8 mb-8 mt-4 bg-background">
+              <div className="flex min-h-screen w-full flex-col container rounded-xl pb-8 mb-8 bg-background">
                 {modal}
                 <NuqsAdapter>{children}</NuqsAdapter>
               </div>
