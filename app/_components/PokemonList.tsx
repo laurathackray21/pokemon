@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { PokemonDetailResponse } from "../types/pokemonDetail";
 import { getAllPokemonDetails } from "../actions/getPokemonDetail";
 import { PokemonCard } from "./PokemonCard";
@@ -11,6 +11,7 @@ import EmptyState from "./EmptyState";
 import { cn } from "@/lib/utils";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import LoadingSpinner from "./LoadingSpinner";
+import { useQueryState } from "nuqs";
 
 interface PokemonListProps {
   initialPokemon: PokemonDetailResponse;
@@ -47,7 +48,7 @@ const letters = [
 
 export default function PokemonList({ initialPokemon }: PokemonListProps) {
   const [scrollTrigger, isInView] = useInView();
-  const [letterFilter, setLetterFilter] = useState<string>("");
+  const [letterFilter, setLetterFilter] = useQueryState("letter");
   const { data, hasNextPage, fetchNextPage, isFetching } = useInfiniteQuery({
     queryKey: ["pokemon", letterFilter],
     queryFn: ({ pageParam = 0 }) =>
@@ -90,7 +91,7 @@ export default function PokemonList({ initialPokemon }: PokemonListProps) {
         <Button
           variant="secondary"
           className="font-bold mt-4 mb-2"
-          onClick={() => setLetterFilter("")}
+          onClick={() => setLetterFilter(null)}
         >
           All
         </Button>

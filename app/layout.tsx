@@ -6,6 +6,7 @@ import { ThemeProvider } from "./_components/ThemeProvider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import QueryClientProvider from "./_providers/QueryClientProvider";
 import MenuBar from "./_components/MenuBar";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const inter = Ubuntu_Sans({ subsets: ["latin"] });
 
@@ -39,7 +40,7 @@ export default function RootLayout({
               <MenuBar />
               <div className="flex min-h-screen w-full flex-col container rounded-xl pb-8 mb-8 mt-4 bg-background">
                 {modal}
-                {children}
+                <NuqsAdapter>{children}</NuqsAdapter>
               </div>
             </main>
           </ThemeProvider>
