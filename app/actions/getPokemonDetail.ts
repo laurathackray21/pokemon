@@ -1,16 +1,30 @@
 "use server";
 import { ColourType } from "../types/colourType";
-import { PokemonDetail } from "../types/pokemonDetail";
+import {
+  GENERATION_ONE_MAX_ID,
+  PokemonDetail,
+  PokemonDetailResponse,
+} from "../types/pokemonDetail";
 import { getPokemon } from "./getPokemon";
 import { getPokemonSpecies } from "./getPokemonSpecies";
 
 export async function getAllPokemonDetails(
   limit: number = 50,
-  offset: number = 0
-): Promise<PokemonDetail[]> {
-  const response = await getPokemon(limit, offset);
+  offset: number = 0,
+  letterFilter: string | null = null
+): Promise<PokemonDetailResponse> {
+  let pokemons;
+  if (letterFilter) {
+    const allPokemon = await getPokemon(GENERATION_ONE_MAX_ID, 0);
+    pokemons = allPokemon.results.filter((p) =>
+      p.name.startsWith(letterFilter.toLowerCase())
+    );
+  } else {
+    const results = await getPokemon(limit, offset);
+    pokemons = results.results;
+  }
   const summaries: PokemonDetail[] = [];
-  for (const pokemon of response.results) {
+  for (const pokemon of pokemons) {
     const pokemonSpeciesData = await getPokemonSpecies(pokemon.name);
     const flavourEntry = pokemonSpeciesData.flavor_text_entries.find(
       (p) => p.language.name === "en" && p.version.name === "red"
@@ -24,7 +38,11 @@ export async function getAllPokemonDetails(
     });
   }
 
-  return summaries;
+  return {
+    data: summaries,
+    previousCursor: offset / limit - 1,
+    nextCursor: offset / limit + 1,
+  };
 }
 
 export async function getPokemonDetails(name: string): Promise<PokemonDetail> {
@@ -46,17 +64,19 @@ export async function getPokemonDetails(name: string): Promise<PokemonDetail> {
   };
 }
 
-export async function filterPokemonByLetter(letter: string): Promise<PokemonDetail[]> {
+export async function filterPokemonByLetter(
+  letter: string
+): Promise<PokemonDetail[]> {
   const allPokemon = await getPokemon(151, 0);
-  const filteredPokemon = allPokemon.results.filter((p) => p.name.startsWith(letter.toLowerCase()));
- 
+  const filteredPokemon = allPokemon.results.filter((p) =>
+    p.name.startsWith(letter.toLowerCase())
+  );
+
   const pokemonDetails: PokemonDetail[] = [];
   for (const p of filteredPokemon) {
-    const details = await getPokemonDetails(p.name)    
-    console.log(details)
+    const details = await getPokemonDetails(p.name);
     pokemonDetails.push(details);
   }
-   console.log(pokemonDetails)
 
   return pokemonDetails;
 }

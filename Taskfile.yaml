@@ -29,8 +29,14 @@ tasks:
   deploy-google-cli:
     desc: Deploy to cloud run using google cli
     cmds:
-      - gcloud run deploy {{.SERVICE_NAME}} --image gcr.io/{{.PROJECT_ID}}/pokemon/{{.TAG}} --project {{.PROJECT_ID}} --platform managed --allow-unauthenticated --region={{.REGION}}
+      - gcloud run deploy {{.SERVICE_NAME}} --image gcr.io/{{.PROJECT_ID}}/pokemon/{{.TAG}} --project {{.PROJECT_ID}} --platform managed --allow-unauthenticated --region={{.REGION}} --set-secrets=TEST1=TEST:latest,TEST2=TEST2:latest,TEST3=TEST3:latest  --vpc-connector="laura-test-vpc" --vpc-egress="all-traffic"
+
+  deploy-removal-google-cli:
+    desc: Deploy to cloud run using google cli
+    cmds:
+      - yes | gcloud run deploy {{.SERVICE_NAME}} --image gcr.io/{{.PROJECT_ID}}/pokemon/{{.TAG}} --project {{.PROJECT_ID}} --platform managed --allow-unauthenticated --region={{.REGION}} --remove-secrets=TEST1=TEST:latest,TEST2=TEST2:latest --clear-vpc-connector
     
+
   build-and-deploy-google-cli:
     desc: Build and deploy to cloud run using google cli
     cmds:

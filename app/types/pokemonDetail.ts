@@ -1,5 +1,7 @@
 import { ColourType } from "./colourType";
 
+export const GENERATION_ONE_MAX_ID = 151;
+
 export interface PokemonDetail {
   id: number;
   name: string;
@@ -7,5 +9,10 @@ export interface PokemonDetail {
   colour: ColourType;
   description: string;
   imageUri: string;
-  // evolutionChain: EvolutionChain;
+}
+
+export interface PokemonDetailResponse {
+  data: PokemonDetail[];  
+  previousCursor?: number;
+  nextCursor?: number;
 }
