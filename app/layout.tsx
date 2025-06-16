@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "./_components/ThemeProvider";
-import { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import QueryClientProvider from "./_providers/QueryClientProvider";
 import MenuBar from "./_components/MenuBar";
@@ -15,9 +14,6 @@ export const metadata: Metadata = {
 };
 
 const themes = ["light", "dark", "pokemon"];
-
-// Create a client
-const queryClient = new QueryClient();
 
 export default function RootLayout({
   children,
