@@ -29,6 +29,9 @@ export async function getAllPokemonDetails(
     const flavourEntry = pokemonSpeciesData.flavor_text_entries.find(
       (p) => p.language.name === "en" && p.version.name === "red"
     );
+    if (pokemonSpeciesData.id > GENERATION_ONE_MAX_ID) {
+      continue; // Skip Pokémon that are not in Generation 1
+    }
     summaries.push({
       name: pokemon.name,
       id: pokemonSpeciesData.id,
