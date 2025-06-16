@@ -13,7 +13,7 @@ import { POKEMON_PER_PAGE } from "../consts/pokedex";
 import { Button } from "@/components/ui/button";
 import EmptyState from "./EmptyState";
 import { cn } from "@/lib/utils";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 
 interface PokemonListProps {
   initialPokemon: PokemonDetailResponse;
@@ -78,11 +78,11 @@ export default function PokemonList({ initialPokemon }: PokemonListProps) {
       if (lastPage?.data?.length < POKEMON_PER_PAGE) {
         return undefined; // No more data
       }
-      console.log(allPages.length);
 
       // Calculate next offset
       return allPages.length * POKEMON_PER_PAGE;
     },
+    staleTime: 0, // forces fresh fetch
   });
 
   useEffect(() => {
@@ -91,6 +91,13 @@ export default function PokemonList({ initialPokemon }: PokemonListProps) {
     }
   }, [isInView, hasNextPage, isFetching, fetchNextPage]);
 
+  function addFilterToQuery(letter: string) {
+    setLetterFilter(letter);
+  }
+
+  if (isFetching && !!letterFilter) {
+    return <LoadingSpinner />;
+  }
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <div className="flex justify-between items-center mb-4 gap-2">
@@ -109,7 +116,7 @@ export default function PokemonList({ initialPokemon }: PokemonListProps) {
               "font-bold mt-4 mb-2 ring ring-transparent",
               letterFilter === letter && "ring-blue"
             )}
-            onClick={() => setLetterFilter(letter)}
+            onClick={() => addFilterToQuery(letter)}
           >
             {letter}
           </Button>
