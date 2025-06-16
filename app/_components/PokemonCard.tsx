@@ -48,18 +48,10 @@ export const PokemonCard = ({ pokemon, colour }: PokemonCardProps) => {
     <Card className={cn(pokemonCardVariants({ colour }))}>
       <CardHeader>
         <CardTitle className="text-foreground">
-          {pokemon.name ? (
-            pokemon.name.toUpperCase()
-          ) : (
-            <div className="h-8 w-full rounded-xl">Enter a name</div>
-          )}
+          {pokemon.name ? pokemon.name.toUpperCase() : "Enter a name"}
         </CardTitle>
         <CardDescription>
-          {pokemon.description ? (
-            pokemon.description
-          ) : (
-            <div className="h-8 w-full rounded-xl">Enter a description</div>
-          )}
+          {pokemon.description ? pokemon.description : "Enter a description"}
         </CardDescription>
       </CardHeader>
       <CardContent className={cn("flex justify-center")}>

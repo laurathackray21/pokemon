@@ -108,7 +108,7 @@ export default function PokemonList({ initialPokemon }: PokemonListProps) {
           </Button>
         ))}
       </div>
-      {data?.pages.length === 0 && !isFetching ? (
+      {!data?.pages[0].data.length && !isFetching ? (
         <EmptyState
           title="No Pokémon Found"
           description="Try searching for a different Pokémon or create your own!"

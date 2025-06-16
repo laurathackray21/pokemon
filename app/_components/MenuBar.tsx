@@ -7,8 +7,8 @@ export default function MenuBar() {
   return (
     <div className="bg-header border-b sticky top-0 backdrop-blur-sm">
       <div className="container flex gap-4 px-4 py-2 ">
-        <Image src="/pokemon.svg" alt="Pokemon Logo" width={200} height={12} />
-        <div className="flex grow justify-between items-center">
+        <Image src="/pokemon.svg" alt="Pokemon Logo" width={120} height={8} />
+        <div className="flex grow justify-between items-end">
           <div className="items-center gap-4">
             <Link href="/" passHref>
               <Button variant="ghost">Pokedex</Button>

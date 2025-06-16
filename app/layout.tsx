@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Ubuntu_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "./_components/ThemeProvider";
@@ -7,7 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import QueryClientProvider from "./_providers/QueryClientProvider";
 import MenuBar from "./_components/MenuBar";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Ubuntu_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Pokemon",
