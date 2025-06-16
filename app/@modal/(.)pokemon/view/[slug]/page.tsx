@@ -4,13 +4,13 @@ import { PokemonDetails } from "@/app/_components/PokemonDetails";
 import { getPokemonDetails } from "@/app/actions/getPokemonDetail";
 
 interface PokemonModalProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export default async function PokemonModal(props: PokemonModalProps) {
-  const pokemonDetails = await getPokemonDetails(props.params.slug);
+  const pokemonDetails = await getPokemonDetails((await props.params).slug);
   return (
     <PokemonDetailModal
       title={pokemonDetails.name}

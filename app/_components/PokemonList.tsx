@@ -1,34 +1,20 @@
 "use client";
 import Link from "next/link";
-import { forwardRef, LegacyRef, useEffect, useState } from "react";
-import { PokemonDetail, PokemonDetailResponse } from "../types/pokemonDetail";
-import {
-  filterPokemonByLetter as getFilteredPokemonDetailsByLetter,
-  getAllPokemonDetails,
-} from "../actions/getPokemonDetail";
+import { useEffect, useState } from "react";
+import { PokemonDetailResponse } from "../types/pokemonDetail";
+import { getAllPokemonDetails } from "../actions/getPokemonDetail";
 import { PokemonCard } from "./PokemonCard";
-import { Loader } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 import { POKEMON_PER_PAGE } from "../consts/pokedex";
 import { Button } from "@/components/ui/button";
 import EmptyState from "./EmptyState";
 import { cn } from "@/lib/utils";
-import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import LoadingSpinner from "./LoadingSpinner";
 
 interface PokemonListProps {
   initialPokemon: PokemonDetailResponse;
 }
-
-const LoadingSpinner = forwardRef(function LoadingSpinner(
-  _props,
-  ref: LegacyRef<SVGSVGElement> | null
-) {
-  return (
-    <div className="flex justify-center py-5">
-      <Loader ref={ref} size={36} color="grey" className="animate-spin" />
-    </div>
-  );
-});
 
 const letters = [
   "A",
