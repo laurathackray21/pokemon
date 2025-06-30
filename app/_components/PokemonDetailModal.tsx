@@ -2,35 +2,39 @@
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { useRouter } from "next/navigation";
+import { PokemonDetails } from "./PokemonDetails";
+import { useQuery } from "@tanstack/react-query";
+import { getPokemonDetails } from "../actions/getPokemonDetail";
+import LoadingSpinner from "./LoadingSpinner";
+import { useQueryState } from "nuqs";
 
-interface ModalProps {
-  title: string;
-  description: string;
-  children: React.ReactNode;
-}
+export function PokemonDetailModal() {
+  const [name, setName] = useQueryState("name");
 
-export function PokemonDetailModal({
-  title,
-  description,
-  children,
-}: ModalProps) {
-  const router = useRouter();
+  const { data, isFetching, isError, isPending } = useQuery({
+    queryKey: ["pokemonDetail"],
+    queryFn: () => getPokemonDetails(name),
+    enabled: !!name,
+  });
 
-  const handleOpenChange = () => {
-    router.back();
-  };
+  if (isFetching || isPending) {
+    return <LoadingSpinner />;
+  }
+
+  if (isError) {
+    return <div>Error!</div>;
+  }
 
   return (
-    <Dialog defaultOpen={true} open={true} onOpenChange={handleOpenChange}>
+    <Dialog open={name !== null} onOpenChange={() => setName(null)}>
       <DialogContent>
         <VisuallyHidden>
           <DialogHeader>
-            <DialogTitle>{title}</DialogTitle>
-            <DialogDescription>{description}</DialogDescription>
+            <DialogTitle>{data?.name}</DialogTitle>
+            <DialogDescription>{data?.description}</DialogDescription>
           </DialogHeader>
         </VisuallyHidden>
-        {children}
+        <PokemonDetails pokemonDetails={data}></PokemonDetails>
       </DialogContent>
     </Dialog>
   );

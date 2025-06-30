@@ -18,10 +18,10 @@ const themes = ["light", "dark", "pokemon"];
 
 export default function RootLayout({
   children,
-  modal,
+  // modal,
 }: Readonly<{
   children: React.ReactNode;
-  modal: React.ReactNode;
+  // modal: React.ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -39,7 +39,7 @@ export default function RootLayout({
             <main>
               <MenuBar />
               <div className="flex min-h-screen w-full flex-col container rounded-xl pb-8 mb-8 bg-background">
-                {modal}
+                {/* {modal} */}
                 <NuqsAdapter>{children}</NuqsAdapter>
               </div>
             </main>

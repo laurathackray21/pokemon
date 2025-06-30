@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { useEffect } from "react";
 import { PokemonDetailResponse } from "../types/pokemonDetail";
 import { getAllPokemonDetails } from "../actions/getPokemonDetail";
@@ -11,6 +10,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import LoadingSpinner from "./LoadingSpinner";
 import { useQueryState } from "nuqs";
 import LetterFilter from "./LetterFilter";
+import { PokemonDetailModal } from "./PokemonDetailModal";
 
 interface PokemonListProps {
   initialPokemon: PokemonDetailResponse;
@@ -19,6 +19,7 @@ interface PokemonListProps {
 export default function PokemonList({ initialPokemon }: PokemonListProps) {
   const [scrollTrigger, isInView] = useInView();
   const [letterFilter, setLetterFilter] = useQueryState("letter");
+  const [name, setName] = useQueryState("name");
   const { data, hasNextPage, fetchNextPage, isFetching } = useInfiniteQuery({
     queryKey: ["pokemon", letterFilter],
     queryFn: ({ pageParam = 0 }) =>
@@ -47,6 +48,10 @@ export default function PokemonList({ initialPokemon }: PokemonListProps) {
     }
   }, [isInView, hasNextPage, isFetching, fetchNextPage]);
 
+  const handlePokemonClick = (pokemonName: string) => {
+    setName(pokemonName);
+  };
+
   if (isFetching && !!letterFilter) {
     return <LoadingSpinner />;
   }
@@ -65,19 +70,24 @@ export default function PokemonList({ initialPokemon }: PokemonListProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {data?.pages.map((p: PokemonDetailResponse) =>
             p.data.map((pokemon) => (
-              <Link key={pokemon.id} href={`/pokemon/view/${pokemon.name}`}>
+              <div
+                key={pokemon.id}
+                onClick={() => handlePokemonClick(pokemon.name)}
+              >
                 <PokemonCard
                   key={pokemon.id}
                   pokemon={pokemon}
                   colour={pokemon.colour}
                 ></PokemonCard>
-              </Link>
+              </div>
             ))
           )}
         </div>
       )}
 
       {hasNextPage ? <LoadingSpinner ref={scrollTrigger} /> : null}
+
+      <PokemonDetailModal />
     </div>
   );
 }

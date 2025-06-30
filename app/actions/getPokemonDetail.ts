@@ -48,7 +48,12 @@ export async function getAllPokemonDetails(
   };
 }
 
-export async function getPokemonDetails(name: string): Promise<PokemonDetail> {
+export async function getPokemonDetails(
+  name: string | null
+): Promise<PokemonDetail> {
+  if (name == null) {
+    throw new Error("Pokemon name cannot be null");
+  }
   const pokemonSpecies = await getPokemonSpecies(name); //TODO add error handling
   // const pokemonEvolutionChain = await getDataFromUrl<EvolutionChainResponse>(
   //   pokemonSpecies.evolution_chain.url
