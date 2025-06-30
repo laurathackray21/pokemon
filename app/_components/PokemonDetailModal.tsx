@@ -17,7 +17,10 @@ export function PokemonDetailModal() {
     enabled: !!name,
   });
 
-  if (isFetching || isPending) {
+  if (isPending) {
+    return <></>;
+  }
+  if (isFetching) {
     return <LoadingSpinner />;
   }
 
