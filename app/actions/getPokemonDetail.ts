@@ -43,8 +43,6 @@ export async function getAllPokemonDetails(
 
   return {
     data: summaries,
-    previousCursor: offset / limit - 1,
-    nextCursor: offset / limit + 1,
   };
 }
 
@@ -70,21 +68,4 @@ export async function getPokemonDetails(
     colour: pokemonSpecies.color.name as ColourType,
     description: flavourEntry?.flavor_text ?? "No description available",
   };
-}
-
-export async function filterPokemonByLetter(
-  letter: string
-): Promise<PokemonDetail[]> {
-  const allPokemon = await getPokemon(151, 0);
-  const filteredPokemon = allPokemon.results.filter((p) =>
-    p.name.startsWith(letter.toLowerCase())
-  );
-
-  const pokemonDetails: PokemonDetail[] = [];
-  for (const p of filteredPokemon) {
-    const details = await getPokemonDetails(p.name);
-    pokemonDetails.push(details);
-  }
-
-  return pokemonDetails;
 }

@@ -12,7 +12,5 @@ export interface PokemonDetail {
 }
 
 export interface PokemonDetailResponse {
-  data: PokemonDetail[];  
-  previousCursor?: number;
-  nextCursor?: number;
+  data: PokemonDetail[];
 }
